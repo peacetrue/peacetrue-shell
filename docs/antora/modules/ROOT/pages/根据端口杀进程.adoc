@@ -49,3 +49,7 @@ java    41642 xiayx  149u  IPv6 0x20945d935f296e7b      0t0  TCP localhost:63519
 == 下载脚本
 
 link:{attachmentsdir}/kill_by_port.sh[根据端口杀进程^]
+
+== 源码地址
+
+https://github.com/peacetrue/learn-shell[学习 shell 命令^]
