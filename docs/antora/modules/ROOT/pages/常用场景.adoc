@@ -1,0 +1,24 @@
+= 常用场景
+
+== 删除 IDEA 配置文件
+
+IDEA 的配置文件分为两类：
+
+. 目录类：.idea
+. 文件类：\*.iml、*.ipr、*.iws
+//TODO 配置文件名称很长需要截图实证
+
+之前使用文件类配置比较多，但文件类配置有时候配置文件名称很长，就想改用目录类配置。这样需要把文件类配置都删除，重新以目录类配置创建项目，怎么快捷的删除文件类配置呢？
+
+[source%nowrap,shell]
+----
+find . -name *.iml -o -name *.ipr -o -name *.iws //<1>
+find . -name "*.iml" -o -name "*.ipr" -o -name "*.iws" //<2>
+find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) //<3>
+find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) -exec rm -rf {} +; //<4>
+----
+<1> 查找名称以 iml、ipr、iws 结尾的文件
+<2> 类似于 <1>，<1> 找不到文件会报错，<2> 不会
+<3> 类似于 <2>，并将找到的所有配置文件作为后续命令的参数，否则只会将 *.iml 作为参数
+<4> 基于 <3> 追加删除操作
+

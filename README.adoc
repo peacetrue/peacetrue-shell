@@ -1,5 +1,5 @@
-= antora 模板项目
+= 学习 shell 命令
 xiayx <xiayouxue@hotmail.com>
-v1.0, 2019-10-16: SNAPSHOT
+v1.0, 2020-07-04: SNAPSHOT
 
-查看 http://peacetrue.github.io/public/peacetrue-template-antora/index.html[详情^]
+详情参考 https://peacetrue.cn/summarize/learn-shell/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93.html[安宁的博客^]
