@@ -1,25 +1,5 @@
 = 常用场景
 
-== 安装自定义脚本
-
-为了方便，编写了一些脚本。希望在任何环境都能快速使用这些脚本，所以提供了一个安装命令 `ptinstalls`，用于安装这些脚本。
-
-为了使用 `ptinstalls`，需要检出 https://github.com/peacetrue/learn-shell[learn-shell^] 资源库。
-
-以下是一键安装命令：
-
-[source%nowrap,bash]
-----
-git clone https://github.com/peacetrue/learn-shell.git && cd learn-shell/docs/antora/modules/ROOT/assets/attachments/peacetrue && chmod 777 ./ptinstalls && chmod 777 ./ptinstall && ./ptinstalls
-----
-
-以下是一键安装命令：
-
-[source%nowrap,bash]
-----
-
-----
-
 == 删除 IDEA 配置文件
 
 IDEA 的配置文件分为两类：
