@@ -2,5 +2,5 @@
 
 echo '安装默认脚本'
 ./ptinstall ../killbp
-./ptinstall peacetrue/ptstart
-./ptinstall peacetrue/ptrestart
+./ptinstall ptstart
+./ptinstall ptrestart
