@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo '安装默认脚本'
+
+echo '安装安宁的脚本'
 ./ptinstall ../killbp
 ./ptinstall ptstart
 ./ptinstall ptrestart
