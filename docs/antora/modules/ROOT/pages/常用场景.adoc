@@ -1,5 +1,22 @@
 = 常用场景
 
+== 安装自定义脚本
+
+为了方便，编写了一些脚本。希望在任何环境都能快速使用这些脚本，所以提供了一个安装命令 `ptinstalls`，用于安装这些脚本。
+
+为了使用 `ptinstalls`，需要检出 https://github.com/peacetrue/learn-shell[learn-shell^] 资源库。
+
+以下是一键安装命令：
+
+[source%nowrap,bash]
+----
+git clone https://github.com/peacetrue/learn-shell.git
+&& cd learn-shell/docs/antora/modules/ROOT/assets/attachments/peacetrue
+&& chmod 777 ./ptinstalls
+&& chmod 777 ./ptinstall
+&& ./ptinstalls
+----
+
 == 删除 IDEA 配置文件
 
 IDEA 的配置文件分为两类：
@@ -10,7 +27,7 @@ IDEA 的配置文件分为两类：
 
 之前使用文件类配置比较多，但文件类配置有时候配置文件名称很长，就想改用目录类配置。这样需要把文件类配置都删除，重新以目录类配置创建项目，怎么快捷的删除文件类配置呢？
 
-[source%nowrap,shell]
+[source%nowrap,bash]
 ----
 find . -name *.iml -o -name *.ipr -o -name *.iws //<1>
 find . -name "*.iml" -o -name "*.ipr" -o -name "*.iws" //<2>
@@ -28,7 +45,8 @@ sed -i "" 's|{type:"2",isRequestDataType:"2"}|{type:"2",isRequestDataType:"2",du
 
 == 删除所有日志目录
 
-.日志目录结构
+本地项目目录结构如下：
+
 [source%nowrap]
 ----
 peacetrue-microservice
@@ -42,4 +60,4 @@ peacetrue-microservice
 │   ├── logs
 ----
 
-`rm -r `find . -name logs``
+删除所有日志命令为：`rm -r `find . -name logs``
