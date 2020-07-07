@@ -3,7 +3,7 @@
 port=${1-8761}
 echo "0.杀掉端口[$port]对应的进程"
 
-result=$(lsof -i:"$port") || exit
+result=$(lsof -i:"$port" -sTCP:LISTEN) || exit
 echo "1.根据端口查询进程: $result"
 
 array=($result)

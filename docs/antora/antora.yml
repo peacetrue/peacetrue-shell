@@ -2,5 +2,8 @@ name: learn-shell
 title: 学习 shell 命令
 version: master
 start_page: ROOT:命令总结.adoc
+asciidoc:
+  attributes:
+    numbered: ''
 nav:
   - modules/ROOT/nav.adoc
