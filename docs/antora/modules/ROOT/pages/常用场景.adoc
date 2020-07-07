@@ -44,3 +44,5 @@ peacetrue-microservice
 ----
 
 删除所有日志命令为：`rm -r `find . -name logs``
+
+同时删除 nohup.out：`rm -r `find . -name logs -o -name nohup.out``
