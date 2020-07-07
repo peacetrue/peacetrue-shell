@@ -46,7 +46,7 @@ java    41642 xiayx  149u  IPv6 0x20945d935f296e7b      0t0  TCP localhost:63519
 
 从左到右从上到下数，COMMAND 是第 1 个，PID 是第 2 个，数到 398 就是第 10 个。理论上不完全准确，应该取第 3 行监听状态中的 PID。
 
-如果要筛选出 LISTEN 状态的端口，可以改为：``result=$(lsof -i:"$port" -sTCP:LISTEN) || exit``
+如果要筛选出 LISTEN 状态的端口，可以改为：``result=$(lsof -i:"$port" -sTCP:LISTEN) || exit``。
 
 == 下载脚本
 
