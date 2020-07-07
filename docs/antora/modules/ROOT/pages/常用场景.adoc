@@ -22,3 +22,24 @@ find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) -exec rm -rf {} +; 
 <3> 类似于 <2>，并将找到的所有配置文件作为后续命令的参数，否则只会将 *.iml 作为参数
 <4> 基于 <3> 追加删除操作
 
+== 查找并替换内容
+
+sed -i "" 's|{type:"2",isRequestDataType:"2"}|{type:"2",isRequestDataType:"2",dueTotAmt:number}|g' `grep '{type:"2",isRequestDataType:"2"}' -rl .`
+
+== 删除所有日志目录
+
+.日志目录结构
+[source%nowrap]
+----
+peacetrue-microservice
+├── peacetrue-microservice-authorization-server
+│   ├── logs
+├── peacetrue-microservice-client
+│   ├── logs
+├── peacetrue-microservice-client-oauth2login
+│   ├── logs
+├── peacetrue-microservice-client-outer
+│   ├── logs
+----
+
+`rm -r `find . -name logs``

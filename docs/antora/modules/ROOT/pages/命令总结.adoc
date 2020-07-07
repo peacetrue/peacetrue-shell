@@ -44,7 +44,9 @@ find: 路径必须在表达式之前: *.ipr # centos 上
 <1> ls 命令可行
 <2> find 命令不行
 
-[quote,'https://linux.die.net/man/1/find[find(1) - Linux man page^]']
+[quote,'https://linux.die.net/man/1/find[find(1) - Linux man page^]
+']
+
 ____
 -name pattern：
 
@@ -122,3 +124,16 @@ $ sed -i 's|static/|jcjstatic/|g' **/*.{js,html,map}
 sed -i "" "s/static/jcjstatic/g" `grep static -rl .` //<1>
 ----
 <1> `grep static -rl .` 查询出多个文件作为输入
+
+== 安装命令
+
+将自己编写的命令安装到当前用户全局。
+
+[source%nowrap,bash]
+----
+$ echo $PATH
+
+/Users/xiayx/.yarn/bin:/Users/xiayx/.config/yarn/global/node_modules/.bin:/Users/xiayx/.nvm/versions/node/v12.18.2/bin:/usr/local/sbin:/usr/local/opt/node@12/bin:/usr/local/opt/gettext/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+----
+
+
