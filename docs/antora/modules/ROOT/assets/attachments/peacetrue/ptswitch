@@ -1,0 +1,20 @@
+#!/bin/bash
+
+content=${1-127.0.0.1 peacetrue.cn}
+file=${2-/etc/hosts}
+
+echo "注释（或取消注释）[$file]中的内容[$content]"
+
+#reg_content=".*$content.*"
+#note_reg_content="#$reg_content"
+note_content="#$content"
+result=$(grep "$note_content" "$file")
+echo "搜索匹配的注释内容：$result"
+
+if [ -z "$result" ]; then
+  echo "尚未注释，追加注释"
+  sudo sed -i '' "s|$content|#$content|g" "$file"
+else
+  echo "已被注释，取消注释"
+  sudo sed -i '' "s|$note_content|$content|g" "$file"
+fi

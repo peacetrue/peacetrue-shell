@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "切换 JDK 版本（1.8<->13）"
+file=~/.zshrc
+ptswitch "export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home" $file
+ptswitch "export JAVA_HOME=/usr/local/Cellar/openjdk/13.0.2+8_2/libexec/openjdk.jdk/Contents/Home" $file
+source $file
+
+java -version

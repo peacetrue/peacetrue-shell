@@ -6,3 +6,5 @@ echo '安装安宁的脚本'
 ./ptinstall ./ptstart
 ./ptinstall ./ptrestart
 ./ptinstall ./ptuninstalls
+./ptinstall ./ptswitch
+./ptinstall ./ptswitchjdk
