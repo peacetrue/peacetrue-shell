@@ -5,6 +5,7 @@ env=${2-default}
 
 echo "0. 在[$env]环境下启动应用[$module]"
 
+cd "$module" || exit
 echo "run jar $module at $(pwd)"
 #nohup java -jar "$module/build/libs/$module-1.0.0-SNAPSHOT.jar" --spring.profiles.active="$env" &
-nohup java -Xmx256m -Xms256m -Xmn96m -Xss256k -jar "$module/build/libs/$module-1.0.0-SNAPSHOT.jar" "--spring.profiles.active=$env" &
+nohup java -Xmx256m -Xms256m -Xmn96m -Xss256k -jar "build/libs/$module-1.0.0-SNAPSHOT.jar" "--spring.profiles.active=$env" &
