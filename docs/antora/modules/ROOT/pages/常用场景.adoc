@@ -24,7 +24,18 @@ find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) -exec rm -rf {} +; 
 
 == 查找并替换内容
 
-sed -i "" 's|{type:"2",isRequestDataType:"2"}|{type:"2",isRequestDataType:"2",dueTotAmt:number}|g' `grep '{type:"2",isRequestDataType:"2"}' -rl .`
+* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' `grep '*.gradle' -rl .`
+* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' `find . -name build.gradle`
+* sed -i "" 's|pdftag|confucianism|g' `find . -name build.gradle`
+* sed -i "" 's|pdf-tag|confucianism|g' `find . -name '*.java'`
+
+== 重命名文件
+
+基于一个模块开发新模块时，往往需要批量重命名文件。
+
+* rename "s/pdf-tag/confucianism/" `find . -name '*.yml'`
+
+
 
 == 删除所有日志目录
 
@@ -46,3 +57,52 @@ peacetrue-microservice
 删除所有日志命令为：`rm -r `find . -name logs``
 
 同时删除 nohup.out：`rm -r `find . -name logs -o -name nohup.out``
+
+== 内存监控
+
+java 应用内存溢出，进程会被系统杀死。
+
+.查看内存使用情况
+----
+$ top
+$ htop
+----
+
+== 网络相关
+
+.静态 IP
+[source%nowrap]
+----
+BOOTPROTO="static" #dhcp改为static
+ONBOOT="yes" #开机启用本配置
+IPADDR=10.0.0.128 #静态IP
+GATEWAY=10.0.0.2 #默认网关
+NETMASK=255.255.255.0 #子网掩码
+DNS1=114.114.114.114 #DNS 配置
+DNS2=8.8.8.8 #DNS 配置
+----
+
+.常用命令
+[source%nowrap,cnf]
+----
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.0.0.128
+firewall-cmd --state
+systemctl stop firewalld
+systemctl disable firewalld
+netstat -an |grep 'ESTABLISHED' |grep -i '8080' |wc -l
+lsof -i:8080
+tcpdump -nn -i ens33 port 5762
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+service network restart
+systemctl restart network
+hostnamectl set-hostname node01
+----
+
+
+== 重命名数据库
+
+[source%nowrap,sql]
+----
+mysql -u root -p 12345678 aum_detection -sNe 'show tables' | while read table; \
+    do mysql -u root -p 12345678 -sNe "rename table aum_detection.$table to aum_detection.$table"; done
+----
