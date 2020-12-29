@@ -130,10 +130,6 @@ sed -i "" "s|console.info(`invoke ${params.apiName} return(decoded):`, res);|ale
 ----
 <1> `grep static -rl .` 查询出多个文件作为输入
 
-== 查看程序占用的端口
-
-ss -tnlp | grep redis
-
 == Tcp Dump
 
 [source%nowrap]

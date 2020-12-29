@@ -5,8 +5,7 @@
 IDEA 的配置文件分为两类：
 
 . 目录类：.idea
-. 文件类：\*.iml、*.ipr、*.iws
-//TODO 配置文件名称很长需要截图实证
+. 文件类：\*.iml、*.ipr、*.iws //TODO 配置文件名称很长需要截图实证
 
 之前使用文件类配置比较多，但文件类配置有时候配置文件名称很长，就想改用目录类配置。这样需要把文件类配置都删除，重新以目录类配置创建项目，怎么快捷的删除文件类配置呢？
 
@@ -34,8 +33,6 @@ find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) -exec rm -rf {} +; 
 基于一个模块开发新模块时，往往需要批量重命名文件。
 
 * rename "s/pdf-tag/confucianism/" `find . -name '*.yml'`
-
-
 
 == 删除所有日志目录
 
@@ -98,7 +95,6 @@ systemctl restart network
 hostnamectl set-hostname node01
 ----
 
-
 == 重命名数据库
 
 [source%nowrap,sql]
@@ -106,3 +102,18 @@ hostnamectl set-hostname node01
 mysql -u root -p 12345678 aum_detection -sNe 'show tables' | while read table; \
     do mysql -u root -p 12345678 -sNe "rename table aum_detection.$table to aum_detection.$table"; done
 ----
+
+== 查看程序占用的端口
+
+ss -tnlp | grep redis
+
+== 杀死查询出的进程
+
+.杀死 Gradle 守护进程
+`$ ps -ef | grep GradleDaemon | grep -v grep | awk '{ print $2 }' | sudo xargs kill -9`
+
+.分解步骤
+. `ps -ef` ：查询所有进程，并输出详情
+. `ps -ef | grep GradleDaemon` ：在上一步基础上筛选出包含 GradleDaemon 的进程
+. `$ ps -ef | grep GradleDaemon | grep -v grep`：在上一步基础上，排除 grep 进程（自己）
+. `$ ps -ef | grep GradleDaemon | grep -v grep | awk '{ print $2 }'`：在上一步基础上，取出进程号
