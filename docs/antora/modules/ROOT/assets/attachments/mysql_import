@@ -6,10 +6,10 @@ newdb=${2-aum_store_back}
 echo "rename $olddb to $newdb"
 mysqlconn="mysql -h 127.0.0.1 -u root -p12345678"
 #$mysqlconn -e "CREATE DATABASE $newdb"
-params=$($mysqlconn -N -e "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='$olddb' and TABLE_TYPE='BASE TABLE'")
+params=$($mysqlconn -N -e "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='$olddb'")
 for name in $params; do
-  echo "rename table $olddb.$name to $newdb.$name"
-  $mysqlconn -e "RENAME TABLE $olddb.$name to $newdb.$name"
+  echo "copy table $newdb.$name from $olddb.$name"
+  $mysqlconn -e "create table $newdb.$name select * from $olddb.$name"
 done
 #$mysqlconn -e "DROP DATABASE $olddb"
 
