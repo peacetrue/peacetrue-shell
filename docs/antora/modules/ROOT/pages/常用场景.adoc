@@ -9,7 +9,7 @@ IDEA 的配置文件分为两类：
 
 之前使用文件类配置比较多，但文件类配置有时候配置文件名称很长，就想改用目录类配置。这样需要把文件类配置都删除，重新以目录类配置创建项目，怎么快捷的删除文件类配置呢？
 
-[source%nowrap,bash]
+[source,bash]
 ----
 find . -name *.iml -o -name *.ipr -o -name *.iws //<1>
 find . -name "*.iml" -o -name "*.ipr" -o -name "*.iws" //<2>
@@ -23,22 +23,23 @@ find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) -exec rm -rf {} +; 
 
 == 查找并替换内容
 
-* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' `grep '*.gradle' -rl .`
-* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' `find . -name build.gradle`
-* sed -i "" 's|pdftag|confucianism|g' `find . -name build.gradle`
-* sed -i "" 's|pdf-tag|confucianism|g' `find . -name '*.java'`
+* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' \`grep '*.gradle' -rl .`
+* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' \`find . -name build.gradle`
+* sed -i "" 's|pdftag|confucianism|g' \`find . -name build.gradle`
+* sed -i "" 's|pdf-tag|confucianism|g' \`find . -name '*.java'`
+* sed -i "" 's|source|source|g' \`find . -name '*.adoc'`
 
 == 重命名文件
 
 基于一个模块开发新模块时，往往需要批量重命名文件。
 
-* rename "s/pdf-tag/confucianism/" `find . -name '*.yml'`
+* rename "s/pdf-tag/confucianism/" \`find . -name '*.yml'`
 
 == 删除所有日志目录
 
 本地项目目录结构如下：
 
-[source%nowrap]
+[source]
 ----
 peacetrue-microservice
 ├── peacetrue-microservice-authorization-server
@@ -68,7 +69,7 @@ $ htop
 == 网络相关
 
 .静态 IP
-[source%nowrap]
+[source]
 ----
 BOOTPROTO="static" #dhcp改为static
 ONBOOT="yes" #开机启用本配置
@@ -80,7 +81,7 @@ DNS2=8.8.8.8 #DNS 配置
 ----
 
 .常用命令
-[source%nowrap,cnf]
+[source,bash]
 ----
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.0.0.128
 firewall-cmd --state
@@ -97,7 +98,7 @@ hostnamectl set-hostname node01
 
 == 重命名数据库
 
-[source%nowrap,sql]
+[source,sql]
 ----
 mysql -u root -p 12345678 aum_detection -sNe 'show tables' | while read table; \
     do mysql -u root -p 12345678 -sNe "rename table aum_detection.$table to aum_detection.$table"; done

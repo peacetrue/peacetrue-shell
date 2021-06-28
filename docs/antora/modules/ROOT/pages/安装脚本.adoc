@@ -13,7 +13,7 @@
 
 直接拷贝下面的命令后运行：
 
-[source%nowrap,bash]
+[source,bash]
 ----
 git clone https://github.com/peacetrue/learn-shell.git && cd learn-shell/docs/antora/modules/ROOT/assets/attachments/peacetrue && chmod 777 ./ptinstalls && chmod 777 ./ptinstall && ./ptinstalls
 ----

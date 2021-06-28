@@ -31,7 +31,7 @@ ____
 
 学完理论知识，实际运用发现存在问题：
 
-[source%nowrap,shell]
+[source,shell]
 ----
 #目录下存在文件 a.iml、a.ipr、a.iws
 $ ls *.{iml,ipr,iws}  //<1>
@@ -76,7 +76,7 @@ find . -name *.iml -o -name *.ipr -o -name *.iws //<2>
 查找文件，偏向根据文件内容规则匹配。
 
 .mac
-[source%nowrap]
+[source]
 ----
 # 在当前目录及子目录下查找包含 static 的文件
 $ grep static -rl . //<1>
@@ -89,7 +89,7 @@ grep '取得WapUserStock'
 替换文件内容。
 
 .mac 测试
-[source%nowrap]
+[source]
 ----
 # 替换文件中所有的 static/ 为 jcjstatic/
 $ sed -i "" 's|static/|jcjstatic/|g' **/*.{js,html,map,css}
@@ -98,7 +98,7 @@ $ sed -i "" 's|"/api|"/jcjapi|g' **/*.js
 ----
 
 .linux 测试
-[source%nowrap]
+[source]
 ----
 # 替换文件中所有的 static/ 为 jcjstatic/
 $ sed -i 's|static/|jcjstatic/|g' **/*.{js,html,map} //<1>
@@ -132,7 +132,7 @@ sed -i "" "s|console.info(`invoke ${params.apiName} return(decoded):`, res);|ale
 
 == Tcp Dump
 
-[source%nowrap]
+[source]
 ----
 # 持续监听不断输出
 $ tcpdump
@@ -154,7 +154,7 @@ $ tcpdump -D
 13.bridge0 [none]
 ----
 
-[source%nowrap]
+[source]
 ----
 01:08:26.672787 IP6 localhost.37450 > localhost.distinct: Flags [S], seq 2691960457, win 43690, options [mss 65476,sackOK,TS val 2722329 ecr 0,nop,wscale 7], length 0
 01:08:26.672837 IP6 localhost.distinct > localhost.37450: Flags [S.], seq 684685777, ack 2691960458, win 43690, options [mss 65476,sackOK,TS val 2722330 ecr 2722329,nop,wscale 7], length 0
