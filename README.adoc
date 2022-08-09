@@ -1,0 +1,48 @@
+= 简介
+peace <xiayouxue@hotmail.com>
+v1.0, 2020-07-04: SNAPSHOT
+:app-name: peacetrue-shell
+
+https://peacetrue.github.io/peacetrue-shell[peacetrue-shell] 是一个支持 https://github.com/basherpm/basher[basher^] 的 Shell 脚本库，
+存储一些自定义的 Shell 脚本。
+
+*basher* 是一个用于 Shell 脚本的包管理器，
+可以使用下面的命令安装 *peacetrue-shell*：
+
+[source%nowrap,bash]
+----
+# 安装 basher
+$ curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
+
+# 安装 peacetrue-shell
+$ basher install peacetrue/peacetrue-shell
+Cloning into '/Users/xiayx/.basher/cellar/packages/peacetrue/peacetrue-shell'...
+remote: Enumerating objects: 46, done.
+remote: Counting objects: 100% (46/46), done.
+remote: Compressing objects: 100% (37/37), done.
+remote: Total 46 (delta 2), reused 46 (delta 2), pack-reused 0
+Receiving objects: 100% (46/46), 2.12 MiB | 555.00 KiB/s, done.
+Resolving deltas: 100% (2/2), done.
+
+# 查看 basher 支持的命令
+$ basher commands
+commands
+completions
+help
+init
+install
+link
+list
+outdated
+package-path
+uninstall
+upgrade
+
+# 查看已安装的脚本库
+$ basher list
+peacetrue/peacetrue-shell
+
+# 查看已安装的脚本
+$ ls -la ~/.basher/cellar/bin
+lrwxr-xr-x  1 xiayx  staff   83 Aug  9 17:12 git-clear-commit -> /Users/xiayx/.basher/cellar/packages/peacetrue/peacetrue-shell/bin/git-clear-commit
+----

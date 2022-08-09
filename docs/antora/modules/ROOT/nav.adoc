@@ -1,0 +1,3 @@
+* xref:index.adoc[]
+* Git
+** xref:git/clear-commit.adoc[]

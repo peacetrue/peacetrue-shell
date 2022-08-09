@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo '卸载安宁的脚本'
+rm -r  /usr/local/bin/killbp
+rm -r  /usr/local/bin/ptstart
+rm -r  /usr/local/bin/ptrestart
+rm -r  /usr/local/bin/ptuninstalls
+rm -r  /usr/local/bin/ptswitch
+rm -r  /usr/local/bin/ptswitchjdk

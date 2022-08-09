@@ -1,0 +1,10 @@
+name: peacetrue-shell
+title: Shell 脚本库
+version: master
+start_page: ROOT:index.adoc
+asciidoc:
+  attributes:
+    numbered: ''
+    app-name: peacetrue-shell
+nav:
+  - modules/ROOT/nav.adoc

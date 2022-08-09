@@ -1,0 +1,27 @@
+= 安装脚本
+
+为了方便，编写了一些脚本。希望在任何环境都能快速使用这些脚本，所以提供了一个安装命令 `ptinstalls`，用于安装这些脚本。`ptinstalls` 安装的脚本包括：
+
+. killbp：根据端口杀进程
+. ptstart：运行 spring-boot 应用
+. ptrestart：重新运行 spring-boot 应用。相比于 ptstart，会停止已运行的应用
+. ptuninstalls：卸载命令，用于卸载由 ptinstalls 安装的命令
+
+== 安装
+
+为了使用 `ptinstalls`，需要检出 https://github.com/peacetrue/peacetrue-shell[peacetrue-shell^] 资源库。
+
+直接拷贝下面的命令后运行：
+
+[source,bash]
+----
+git clone https://github.com/peacetrue/peacetrue-shell.git && cd peacetrue-shell/docs/antora/modules/ROOT/assets/attachments/peacetrue && chmod 777 ./ptinstalls && chmod 777 ./ptinstall && ./ptinstalls
+----
+
+== 卸载
+
+卸载直接使用：`ptuninstalls`，该命令在上一步已经安装好了。
+
+== 优化
+
+命令单独使用一个资源库，peacetrue-shell 资源库还含有与命令无关的文档信息，不需要检查。

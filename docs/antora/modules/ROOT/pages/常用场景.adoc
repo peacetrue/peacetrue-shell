@@ -1,0 +1,130 @@
+= 常用场景
+
+== 删除 IDEA 配置文件
+
+IDEA 的配置文件分为两类：
+
+. 目录类：.idea
+. 文件类：\*.iml、*.ipr、*.iws //TODO 配置文件名称很长需要截图实证
+
+之前使用文件类配置比较多，但文件类配置有时候配置文件名称很长，就想改用目录类配置。这样需要把文件类配置都删除，重新以目录类配置创建项目，怎么快捷的删除文件类配置呢？
+
+[source,bash]
+----
+find . -name *.iml -o -name *.ipr -o -name *.iws //<1>
+find . -name "*.iml" -o -name "*.ipr" -o -name "*.iws" //<2>
+find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) //<3>
+find . \( -name "*.iml" -o -name "*.ipr" -o -name "*.iws" \) -exec rm -rf {} +; //<4>
+----
+<1> 查找名称以 iml、ipr、iws 结尾的文件
+<2> 类似于 <1>，<1> 找不到文件会报错，<2> 不会
+<3> 类似于 <2>，并将找到的所有配置文件作为后续命令的参数，否则只会将 *.iml 作为参数
+<4> 基于 <3> 追加删除操作
+
+== 查找并替换内容
+
+* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' \`grep '*.gradle' -rl .`
+* sed -i "" 's|1.0.6.RELEASE|1.0.8.RELEASE|g' \`find . -name build.gradle`
+* sed -i "" 's|pdftag|confucianism|g' \`find . -name build.gradle`
+* sed -i "" 's|pdf-tag|confucianism|g' \`find . -name '*.java'`
+* sed -i "" 's|source|source|g' \`find . -name '*.adoc'`
+
+== 重命名文件
+
+基于一个模块开发新模块时，往往需要批量重命名文件。
+
+* rename "s/pdf-tag/confucianism/" \`find . -name '*.yml'`
+
+== 删除所有日志目录
+
+本地项目目录结构如下：
+
+[source]
+----
+peacetrue-microservice
+├── peacetrue-microservice-authorization-server
+│   ├── logs
+├── peacetrue-microservice-client
+│   ├── logs
+├── peacetrue-microservice-client-oauth2login
+│   ├── logs
+├── peacetrue-microservice-client-outer
+│   ├── logs
+----
+
+删除所有日志命令为：`rm -r `find . -name logs``
+
+同时删除 nohup.out：`rm -r `find . -name logs -o -name nohup.out``
+
+== 内存监控
+
+java 应用内存溢出，进程会被系统杀死。
+
+.查看内存使用情况
+----
+$ top
+$ htop
+----
+
+== 网络相关
+
+.静态 IP
+[source]
+----
+BOOTPROTO="static" #dhcp改为static
+ONBOOT="yes" #开机启用本配置
+IPADDR=10.0.0.128 #静态IP
+GATEWAY=10.0.0.2 #默认网关
+NETMASK=255.255.255.0 #子网掩码
+DNS1=114.114.114.114 #DNS 配置
+DNS2=8.8.8.8 #DNS 配置
+----
+
+.常用命令
+[source,bash]
+----
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.0.0.128
+firewall-cmd --state
+systemctl stop firewalld
+systemctl disable firewalld
+netstat -an |grep 'ESTABLISHED' |grep -i '8080' |wc -l
+lsof -i:8080
+tcpdump -nn -i ens33 port 5762
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+service network restart
+systemctl restart network
+hostnamectl set-hostname node01
+----
+
+== 重命名数据库
+
+[source,sql]
+----
+mysql -u root -p 12345678 aum_detection -sNe 'show tables' | while read table; \
+    do mysql -u root -p 12345678 -sNe "rename table aum_detection.$table to aum_detection.$table"; done
+----
+
+== 查看程序占用的端口
+
+ss -tnlp | grep redis
+
+== 杀死查询出的进程
+
+.杀死 Gradle 守护进程
+`$ ps -ef | grep GradleDaemon | grep -v grep | awk '{ print $2 }' | sudo xargs kill -9`
+
+.分解步骤
+. `ps -ef` ：查询所有进程，并输出详情
+. `ps -ef | grep GradleDaemon` ：在上一步基础上筛选出包含 GradleDaemon 的进程
+. `$ ps -ef | grep GradleDaemon | grep -v grep`：在上一步基础上，排除 grep 进程（自己）
+. `$ ps -ef | grep GradleDaemon | grep -v grep | awk '{ print $2 }'`：在上一步基础上，取出进程号
+
+== 别名
+
+[source%nowrap,bash]
+----
+# 使用 IDEA 打开项目，从 IDE 选择项目路径，打开太慢
+alias openidea="open -a 'IntelliJ IDEA'"
+# 使用 gradle 发布
+alias gradlepublish="gradle clean build publishToMavenLocal publish -Psigning.keyId=xxx -Psigning.password=xxx -Psigning.secretKeyRingFile=/Users/xiayx/.gnupg/secring.gpg -PossrhUsername=xxx -PossrhPassword=xxx"
+----

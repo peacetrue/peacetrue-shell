@@ -1,0 +1,165 @@
+= 命令总结
+
+== 参考资料
+
+* link:{attachmentsdir}/The_Linux_Command_Line_中文版-10150838.pdf[The Linux Command Line 中文版-10150838.pdf^]
+* http://www.ruanyifeng.com/blog/2018/09/bash-wildcards.html[命令行通配符教程^]
+* https://linux.die.net/man/[man page^]
+* https://man.linuxde.net/[man page 中文^]
+
+== find
+
+查找文件，偏向根据文件名称规则匹配。
+
+=== -name 参数详解
+
+经常这么用：`find . -name *.txt`，但有一些不明白的地方：
+
+* -name 参数的匹配模式具体是什么名称？
+* * 具体含义是什么？
+* 除了 * 还有没有其他通配符？
+* -name "*.txt" 加双引号的作用是什么？
+
+[quote,《The Linux Command Line》]
+____
+-name pattern：
+
+用指定的通配符模式匹配的文件和目录
+____
+
+那么通配符模式是什么？阮老师在 http://www.ruanyifeng.com/blog/2018/09/bash-wildcards.html[命令行通配符教程^] 中解释得很详细。
+
+学完理论知识，实际运用发现存在问题：
+
+[source,shell]
+----
+#目录下存在文件 a.iml、a.ipr、a.iws
+$ ls *.{iml,ipr,iws}  //<1>
+a.iml   a.ipr   a.iws
+
+$ find . -name *.{iml,ipr,iws} //<2>
+find: a.ipr: unknown primary or operator # mac 上
+find: 路径必须在表达式之前: *.ipr # centos 上
+----
+<1> ls 命令可行
+<2> find 命令不行
+
+[quote,'https://linux.die.net/man/1/find[find(1) - Linux man page^]
+']
+
+____
+-name pattern：
+
+Base of file name (the path with the leading directories removed) matches shell pattern pattern.
+The metacharacters ('*', '?', and '[]') match a '.' at the start of the base name (this is a change in findutils-4.2.2; see section STANDARDS CONFORMANCE below).
+To ignore a directory and the files under it, use -prune; see an example in the description of -path.
+Braces are not recognised as being special, despite the fact that some shells including Bash imbue braces with a special meaning in shell patterns.
+The filename matching is performed with the use of the fnmatch(3) library function.
+Don't forget to enclose the pattern in quotes in order to protect it from expansion by the shell.
+____
+
+简单解释就是不支持 `{}` 模式。
+
+如果想要使用 `{}` 模式，可以通过 -o 参数变通实现：
+
+----
+find . -name *.{iml,ipr,iws} //<1>
+find . -name *.iml -o -name *.ipr -o -name *.iws //<2>
+----
+<1> 不支持 `{}` 模式，无法使用
+<2> 等效于 <1>，可替代 <1>
+
+//在 https://stackoverflow.com/questions/1133698/find-name-pattern-that-matches-multiple-patterns[stackoverflow^] 的一个问题指出 `{}` 模式不被认为是特殊的
+
+== grep
+
+查找文件，偏向根据文件内容规则匹配。
+
+.mac
+[source]
+----
+# 在当前目录及子目录下查找包含 static 的文件
+$ grep static -rl . //<1>
+----
+
+grep '取得WapUserStock'
+
+== sed
+
+替换文件内容。
+
+.mac 测试
+[source]
+----
+# 替换文件中所有的 static/ 为 jcjstatic/
+$ sed -i "" 's|static/|jcjstatic/|g' **/*.{js,html,map,css}
+# 替换文件中所有的 "/api 为 "/jcjapi
+$ sed -i "" 's|"/api|"/jcjapi|g' **/*.js
+----
+
+.linux 测试
+[source]
+----
+# 替换文件中所有的 static/ 为 jcjstatic/
+$ sed -i 's|static/|jcjstatic/|g' **/*.{js,html,map} //<1>
+# 替换文件中所有的 "/api 为 "/jcjapi
+$ sed -i 's|"/api|"/jcjapi|g' **/*.js
+$ sed -i 's|static/|jcjstatic/|g' **/*.{js,html,map}
+----
+<1> \**/*.{js,html,map} 能匹配到所有目录下的文件（根据匹配不到文件报错判断），但只会对当前目录下的文件执行替换（根据实际执行效果判断），可使用套接规则优化 //TODO 待核实
+
+=== filename
+
+以下均为 mac 系统上的测试结果：
+
+名称规则可包含 http://www.ruanyifeng.com/blog/2018/09/bash-wildcards.html[通配符^]。
+
+.通配符层级规则
+* a.txt：匹配当前目录下 a.txt 文件
+* */a.txt：匹配子一级目录下 a.txt 文件
+* **/a.txt：匹配当前目录和所有下级目录下 a.txt 文件
+* 引号将名称变为字面模式，例如：\*.txt 匹配任意 txt 文件，"*.txt" 匹配名称为 * 的 txt 文件
+
+.套接规则
+----
+sed -i "" "s/static/jcjstatic/g" `grep static -rl .` //<1>
+sed -i "" "s/res.retCode/res.result/g" `grep res.retCode -rl .` //<1>
+sed -i "" "s|console.info(`invoke ${params.apiName} return(decoded):`, res);|alert(res)|g" `grep res.retCode -rl .` //<1>
+
+`grep ', res);' -rl .`
+----
+<1> `grep static -rl .` 查询出多个文件作为输入
+
+== Tcp Dump
+
+[source]
+----
+# 持续监听不断输出
+$ tcpdump
+
+# -D：打印出系统中所有可以用 tcpdump 截包的网络接口
+$ tcpdump -D
+1.en0 [Up, Running]
+2.p2p0 [Up, Running]
+3.awdl0 [Up, Running]
+4.llw0 [Up, Running]
+5.utun0 [Up, Running]
+6.vboxnet0 [Up, Running]
+7.utun1 [Up, Running]
+8.lo0 [Up, Running, Loopback]
+9.en1 [Up, Running]
+10.en2 [Up, Running]
+11.gif0 [none]
+12.stf0 [none]
+13.bridge0 [none]
+----
+
+[source]
+----
+01:08:26.672787 IP6 localhost.37450 > localhost.distinct: Flags [S], seq 2691960457, win 43690, options [mss 65476,sackOK,TS val 2722329 ecr 0,nop,wscale 7], length 0
+01:08:26.672837 IP6 localhost.distinct > localhost.37450: Flags [S.], seq 684685777, ack 2691960458, win 43690, options [mss 65476,sackOK,TS val 2722330 ecr 2722329,nop,wscale 7], length 0
+01:08:26.672850 IP6 localhost.37450 > localhost.distinct: Flags [.], ack 1, win 342, options [nop,nop,TS val 2722330 ecr 2722330], length 0
+----
+
+
+* tcpdump distinct to port

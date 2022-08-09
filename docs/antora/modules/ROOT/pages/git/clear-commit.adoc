@@ -1,0 +1,56 @@
+= 清除提交记录
+
+在使用 Git 时，我们会多次提交代码并推送到远程分支。
+有时候，为了赶项目进度，提交记录比较混乱，
+希望能够删除分支上所有的提交记录，
+并使用最新代码做初始提交。
+
+以 master 分支为例，一种可行的方案 footnote:[参考 https://www.systutorials.com/how-to-clear-git-history-in-local-and-remote-branches/] 如下：
+
+[source%nowrap,bash]
+----
+# 创建一个临时孤儿分支，孤儿分支不包含历史提交记录
+git checkout --orphan tmp-master
+# 添加所有文件
+git add -A
+# 提交所有文件
+git commit -m 'Add files'
+# 删除本地 master 分支
+git branch -D master
+# 将 tmp-master 分支改名为 master
+git branch -m master
+# 强制将本地 master 分支推送到远程
+git push -f origin master
+----
+
+// ln -s ../../../../../../bin/git-clear-commit git-clear-commit
+// ln -s "$(pwd)/git-clear-commit" /usr/local/bin/git-clear-commit
+按上面的实现思路，制作一个 *提交记录清除脚本*：
+
+.git-clear-commit
+[source%nowrap,bash]
+----
+include::example$git/git-clear-commit[]
+----
+
+以 peacetrue-shell 资源库为例，测试脚本执行效果：
+
+[source%nowrap,bash]
+----
+$ git-clear-commit
+branch: master, message: init commit.
+Switched to a new branch 'tmp-master'
+[tmp-master (root-commit) 1b56659] init commit.
+ 33 files changed, 922 insertions(+)
+......
+Deleted branch master (was c154cad).
+Enumerating objects: 46, done.
+Counting objects: 100% (46/46), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (39/39), done.
+Writing objects: 100% (46/46), 2.12 MiB | 2.05 MiB/s, done.
+Total 46 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), done.
+To https://github.com/peacetrue/peacetrue-shell.git
+ + c154cad...1b56659 master -> master (forced update)
+----

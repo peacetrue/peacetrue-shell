@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+echo '安装脚本'
+./ptinstall ../killbp
+./ptinstall ./ptstart
+./ptinstall ./ptrestart
+./ptinstall ./ptuninstalls
+./ptinstall ./ptswitch
+./ptinstall ./ptswitchjdk
