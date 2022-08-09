@@ -1,5 +1,5 @@
-name: learn-shell
-title: 学习 shell 命令
+name: peacetrue-shell
+title: Peacetrue Shell
 version: master
 start_page: ROOT:命令总结.adoc
 asciidoc:

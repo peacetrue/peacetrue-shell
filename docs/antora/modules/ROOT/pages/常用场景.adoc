@@ -118,3 +118,13 @@ ss -tnlp | grep redis
 . `ps -ef | grep GradleDaemon` ：在上一步基础上筛选出包含 GradleDaemon 的进程
 . `$ ps -ef | grep GradleDaemon | grep -v grep`：在上一步基础上，排除 grep 进程（自己）
 . `$ ps -ef | grep GradleDaemon | grep -v grep | awk '{ print $2 }'`：在上一步基础上，取出进程号
+
+== 别名
+
+[source%nowrap,bash]
+----
+# 使用 IDEA 打开项目，从 IDE 选择项目路径，打开太慢
+alias openidea="open -a 'IntelliJ IDEA'"
+# 使用 gradle 发布
+alias gradlepublish="gradle clean build publishToMavenLocal publish -Psigning.keyId=xxx -Psigning.password=xxx -Psigning.secretKeyRingFile=/Users/xiayx/.gnupg/secring.gpg -PossrhUsername=xxx -PossrhPassword=xxx"
+----

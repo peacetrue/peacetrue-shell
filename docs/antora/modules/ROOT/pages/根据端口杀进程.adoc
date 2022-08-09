@@ -66,4 +66,4 @@ $ ./kill_by_port.sh 8080
 
 == 源码地址
 
-https://github.com/peacetrue/learn-shell[学习 shell 命令^]
+https://github.com/peacetrue/peacetrue-shell[学习 shell 命令^]

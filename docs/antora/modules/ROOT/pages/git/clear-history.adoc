@@ -1,0 +1,37 @@
+= 清除历史
+
+在使用 Git 时，我们会多次提交代码并推送到远程。
+之前，为了赶项目进度，提交比较混乱，
+希望能够删除分支上所有的历史提交记录，
+并使用最新的代码做初始提交。
+
+以 master 分支为例，一种可行的方案 footnote:[参考 https://www.systutorials.com/how-to-clear-git-history-in-local-and-remote-branches/] 如下：
+
+[source%nowrap,bash]
+----
+# 创建一个临时孤儿分支，孤儿分支不包含历史提交记录
+git checkout --orphan tmp-master
+# 添加所有文件
+git add -A
+# 提交所有文件
+git commit -m 'Add files'
+# 删除本地 master 分支
+git branch -D master
+# 将 tmp-master 分支改名为 master
+git branch -m master
+# 强制将本地 master 分支推送到远程
+git push -f origin master
+----
+
+按上面的实现思路，制作一个 *历史记录清除脚本*：
+
+.git_clear_history.sh
+[source%nowrap,bash]
+----
+include::attachment$git/clear_history[]
+----
+
+[source%nowrap,bash]
+----
+$ git_clear_history
+----

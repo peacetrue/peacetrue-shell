@@ -1,0 +1,13 @@
+#!/bin/bash
+
+path=${1}
+if [ -z "$path" ]; then
+  echo "缺少必填参数[1:脚本路径]"
+  exit 0
+fi
+
+echo "安装脚本[$path]"
+
+chmod 777 "$path" || exit
+cp "$path" /usr/local/bin/  || exit
+

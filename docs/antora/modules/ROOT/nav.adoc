@@ -1,4 +1,4 @@
-* xref:命令总结.adoc[命令总结]
-* xref:常用场景.adoc[常用场景]
-* xref:安装脚本.adoc[安装脚本]
-* xref:根据端口杀进程.adoc[根据端口杀进程]
+* xref:命令总结.adoc[]
+* xref:常用场景.adoc[]
+* xref:安装脚本.adoc[]
+* xref:根据端口杀进程.adoc[]

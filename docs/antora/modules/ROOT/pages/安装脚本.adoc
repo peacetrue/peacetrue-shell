@@ -9,13 +9,13 @@
 
 == 安装
 
-为了使用 `ptinstalls`，需要检出 https://github.com/peacetrue/learn-shell[learn-shell^] 资源库。
+为了使用 `ptinstalls`，需要检出 https://github.com/peacetrue/peacetrue-shell[peacetrue-shell^] 资源库。
 
 直接拷贝下面的命令后运行：
 
 [source,bash]
 ----
-git clone https://github.com/peacetrue/learn-shell.git && cd learn-shell/docs/antora/modules/ROOT/assets/attachments/peacetrue && chmod 777 ./ptinstalls && chmod 777 ./ptinstall && ./ptinstalls
+git clone https://github.com/peacetrue/peacetrue-shell.git && cd peacetrue-shell/docs/antora/modules/ROOT/assets/attachments/peacetrue && chmod 777 ./ptinstalls && chmod 777 ./ptinstall && ./ptinstalls
 ----
 
 == 卸载
@@ -24,4 +24,4 @@ git clone https://github.com/peacetrue/learn-shell.git && cd learn-shell/docs/an
 
 == 优化
 
-命令单独使用一个资源库，learn-shell 资源库还含有与命令无关的文档信息，不需要检查。
+命令单独使用一个资源库，peacetrue-shell 资源库还含有与命令无关的文档信息，不需要检查。
