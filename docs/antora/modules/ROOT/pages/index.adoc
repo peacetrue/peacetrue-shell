@@ -46,4 +46,7 @@ peacetrue/peacetrue-shell
 # 查看已安装的脚本
 $ ls -la ~/.basher/cellar/bin
 lrwxr-xr-x  1 xiayx  staff   83 Aug  9 17:12 git-clear-commit -> /Users/xiayx/.basher/cellar/packages/peacetrue/peacetrue-shell/bin/git-clear-commit
+
+# 更新 peacetrue-shell
+$ basher upgrade peacetrue/peacetrue-shell
 ----
