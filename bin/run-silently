@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# 静默运行
+# ./run-silently 'echo "aa"'
+
+command=${1-command}
+echo "静默运行：$command"
+
+eval "nohup $command > /dev/null 2>&1 &"
+echo "执行脚本：nohup $command > /dev/null 2>&1 &"
+
+PID=$!
+echo "进程为：$PID"
+
+echo -e "#!/bin/bash \n kill -9 $PID" > kill-run-silently
+chmod +x kill-run-silently
+echo "生成 kill 命令"
+
