@@ -2,31 +2,12 @@
 
 以下脚本主要在 mac 上调试，centos7 上测试也可行，其他环境没有试过。
 
-.kill_by_port.sh
+//  ln -s ../../../../../../bin/kill-by-port kill-by-port
+
+.kill-by-port
 [source,bash]
 ----
-#!/bin/bash
-
-#第 1 个参数为端口，默认为 8761
-port=${1-8761}
-echo "0.杀掉端口[$port]对应的进程"
-
-#查询端口相关的进程信息，返回字符串
-result=$(lsof -i:"$port") || exit
-echo "1.根据端口查询进程: $result"
-
-#将字符串转换为数组
-array=($result)
-
-#获取第 10 个参数为进程号
-pid=${array[10]}
-echo "2.根据进程查询结果取得进程号:$pid"
-
-#如果取得进程号则杀掉
-if [ -n "$pid" ]; then
-  echo "3.杀掉进程$pid"
-  kill -9 $pid
-fi
+include::example$common/kill-by-port[]
 ----
 
 == 进程号
@@ -48,22 +29,12 @@ java    41642 xiayx  149u  IPv6 0x20945d935f296e7b      0t0  TCP localhost:63519
 
 如果要筛选出 LISTEN 状态的端口，可以改为：``result=$(lsof -i:"$port" -sTCP:LISTEN) || exit``。
 
-== 下载脚本
-
-link:{attachmentsdir}/kill_by_port.sh[根据端口杀进程^]
-
 == 使用示例
 
 下载脚本后，进入脚本所在目录，执行以下命令：
 
 [source,bash]
 ----
-#赋予执行权限
-$ chmod 777 ./kill_by_port.sh
-#杀掉 8080 对应的进程
-$ ./kill_by_port.sh 8080
+#杀掉 80 对应的进程
+$ kill-by-port 80
 ----
-
-== 源码地址
-
-https://github.com/peacetrue/peacetrue-shell[学习 shell 命令^]
