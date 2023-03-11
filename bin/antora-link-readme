@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ln -s ./docs/antora/modules/ROOT/pages/index.adoc README.adoc

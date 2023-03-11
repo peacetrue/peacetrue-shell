@@ -1,0 +1,73 @@
+= lsof
+
+//@formatter:off
+lsof 是 [.underline]##l##i[.underline]##s##t [.underline]##o##pen [.underline]##f##iles 的缩写，
+指列出打开的文件，打开的文件可以是常规文件、目录、块特殊文件、字符特殊文件、执行文本引用、库、流或网络文件（互联网套接字、NFS 文件或 UNIX 域套接字）。
+文件系统中的特定文件或所有文件都可以按路径选择。
+
+ If any list request option is specified, other list requests must be specifically requested - e.g., if -U is specified for the listing of UNIX socket
+ files,  NFS files won't be listed unless -N is also specified; or if a user list is specified with the -u option, UNIX domain socket files, belonging
+ to users not in the list, won't be listed unless the -U option is also specified.
+
+ 如果指定了任何列表请求选项，则必须专门请求其他列表请求 - 例如，如果为 UNIX 套接字的列表指定了 -U
+ 文件，除非还指定了 -N，否则不会列出 NFS 文件; 或者，如果使用 -u 选项指定用户列表，则 UNIX 域套接字文件属于
+ 对于不在列表中的用户，将不会列出，除非还指定了 -U 选项。
+
+ Normally list options that are specifically stated are ORed - i.e., specifying the -i option without an address and the -ufoo option produces a list‐
+ ing of all network files OR files belonging to processes owned by user ``foo''.  The exceptions are:
+
+
+== 安装
+
+.CentOS
+[source%nowrap,bash]
+----
+$ yum install -y lsof
+----
+
+== 用法
+
+[source%nowrap,bash]
+----
+# 查看当前进程打开的文件
+$ lsof -p $$
+include::example$lsof/lsof.txt[]
+----
+
+.参数说明
+-p::
+p 是 process 的缩写，指定查看的进程。
+$$::
+当前进程。
+
+.输出结果说明
+COMMAND::
+启动进程使用的命令。
+PID::
+PID 是 [.underline]##p##rocess [.underline]##id##entity 的缩写，指进程号。
+USER::
+进程所属用户。
+FD::
+FD 是 [.underline]##f##ile [.underline]##d##escriptor 的缩写，指进程打开的文件描述符。
+TYPE::
+文件描述符类型。
+DEVICE::
+设备号。
+SIZE/OFF::
+SIZE 指文件大小；OFF(SET) 指读取偏移。
+NODE::
+INODE 号。
+NAME::
+文件路径。
+
+.FD 详解
+cwd::
+cwd 是 [.underline]##c##urrent [.underline]##w##orking [.underline]##d##irectory 的缩写，指当前工作目录。
+rtd::
+rtd 是 [.underline]##r##oo[.underline]##t## [.underline]##d##irectory 的缩写，指根路径。
+
+
+== 参考
+
+* https://zhuanlan.zhihu.com/p/512491366[文件描述符总结^]
+* https://man7.org/linux/man-pages/man8/lsof.8.html[man-lsof^]

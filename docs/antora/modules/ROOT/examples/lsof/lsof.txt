@@ -1,0 +1,15 @@
+COMMAND   PID USER   FD   TYPE DEVICE  SIZE/OFF     NODE NAME
+bash    25500 root  cwd    DIR  253,0      4096  8409153 /root
+bash    25500 root  rtd    DIR  253,0       224       64 /
+bash    25500 root  txt    REG  253,0    964536 12584511 /usr/bin/bash
+bash    25500 root  mem    REG  253,0     61560   562188 /usr/lib64/libnss_files-2.17.so
+bash    25500 root  mem    REG  253,0 106176928 13012187 /usr/lib/locale/locale-archive
+bash    25500 root  mem    REG  253,0   2156592      624 /usr/lib64/libc-2.17.so
+bash    25500 root  mem    REG  253,0     19248   562162 /usr/lib64/libdl-2.17.so
+bash    25500 root  mem    REG  253,0    174576    38604 /usr/lib64/libtinfo.so.5.9
+bash    25500 root  mem    REG  253,0    163312    15946 /usr/lib64/ld-2.17.so
+bash    25500 root  mem    REG  253,0     26970  4222364 /usr/lib64/gconv/gconv-modules.cache
+bash    25500 root    0u   CHR  136,8       0t0       11 /dev/pts/8
+bash    25500 root    1u   CHR  136,8       0t0       11 /dev/pts/8
+bash    25500 root    2u   CHR  136,8       0t0       11 /dev/pts/8
+bash    25500 root  255u   CHR  136,8       0t0       11 /dev/pts/8

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# 合并当前分支到指定分支
+
+#参数 1：目标分支名
+target_branch=${1-master}
+current_branch=$(git branch | grep '* ' | tr -d '* ')
+#参数 2：提交信息
+message=${2-"merge from $current_branch to $target_branch"}
+git checkout "$target_branch"
+git pull
+git merge -m "$message" "$current_branch"
+git push
+git checkout "$current_branch"

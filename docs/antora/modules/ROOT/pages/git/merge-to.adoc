@@ -1,0 +1,8 @@
+= 合并到指定分支
+
+参考 https://stackoverflow.com/questions/3672073/how-to-merge-the-current-branch-into-another-branch[How to merge the current branch into another branch?^]。
+
+
+// ln -s ../../../../../../bin/git-merge-to git-merge-to
+// ln -s "$(pwd)/git-merge-to" ~/.basher/cellar/bin/git-merge-to
+

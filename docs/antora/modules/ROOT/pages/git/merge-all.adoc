@@ -1,0 +1,36 @@
+= 合并其他分支
+
+合并其他分支到当前分支上。
+
+. 获取所有分支
+. 获取当前分支
+. 获取其他分支
+. 合并其他分支到当前分支
+
+== 查看所有分支
+
+// ln -s ../../../../../../bin/git-merge-to git-merge-to
+// ln -s "$(pwd)/git-merge-from" ~/.basher/cellar/bin/git-merge-from
+
+
+----
+git fetch
+git branch
+git branch
+git fetch origin template-antora
+git merge -m 'merge to master' origin/template-antora --strategy-option theirs
+----
+
+== How to merge the current branch into another branch
+
+参考 https://stackoverflow.com/questions/3672073/how-to-merge-the-current-branch-into-another-branch[]
+
+[source%nowrap,bash,subs="attributes"]
+----
+git remote add local /Users/xiayx/Documents/Projects/bee
+git push local dev:master
+
+merge-to = "!f() { export tmp_branch=git branch | grep '* ' | tr -d '* '; git checkout $1 && echo git merge $tmp_branch && echo git checkout $tmp_branch; unset $tmp_branch; }; f
+
+export current_branch=git branch | grep '* ' | tr -d '* '; git checkout $1 && echo git merge -m 'merge from $current_branch to $1' $current_branch && echo git checkout $current_branch; unset $current_branch;
+----

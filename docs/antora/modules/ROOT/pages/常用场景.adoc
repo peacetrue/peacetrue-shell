@@ -119,6 +119,8 @@ ss -tnlp | grep redis
 . `$ ps -ef | grep GradleDaemon | grep -v grep`：在上一步基础上，排除 grep 进程（自己）
 . `$ ps -ef | grep GradleDaemon | grep -v grep | awk '{ print $2 }'`：在上一步基础上，取出进程号
 
+// ps -ef | grep ApacheJMeter.jar | grep -v grep | awk '{ print $2 }' | xargs kill -9
+
 == 别名
 
 [source%nowrap,bash]

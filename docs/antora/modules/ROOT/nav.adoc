@@ -1,5 +1,7 @@
 * xref:index.adoc[]
 * Common
 ** xref:根据端口杀进程.adoc[]
+** xref:lsof.adoc[]
+** xref:disk.adoc[]
 * Git
 ** xref:git/clear-commit.adoc[]

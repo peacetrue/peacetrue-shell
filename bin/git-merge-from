@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# 从其他分支合并到当前分支
+other_branch=$(git branch | grep -v "* ")
+other_branches=($other_branch)
+for branch in "${other_branches[@]}"; do
+  echo "merge from $branch"
+  git fetch origin "$branch"
+  git merge -m "merge from $branch" "origin/$branch" --strategy-option theirs
+done
+

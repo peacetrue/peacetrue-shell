@@ -1,0 +1,12 @@
+= Git
+
+.常用命令
+[source%nowrap,bash]
+----
+# 一次同步所有分支
+git pull --all origin
+# 一次拉取所有分支
+git fetch --all origin
+# 一次将本地所有分支推上去
+git push --all origin
+----

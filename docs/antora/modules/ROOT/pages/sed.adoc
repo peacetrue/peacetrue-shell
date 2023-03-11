@@ -1,0 +1,32 @@
+= Sed
+
+Sed 的全称是 Stream Editor，是一种文本流编辑器。
+
+== sed -i 删除硬链接
+
+.环境准备
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+mkdir test
+cd test
+ls -l
+echo 'a' > a.txt
+ln a.txt b.txt
+ls -l
+#-rw-r--r-- 2 root root 2  2月 12 14:47 a.txt
+#-rw-r--r-- 2 root root 2  2月 12 14:47 b.txt
+----
+
+.问题复现
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+echo 'a' >> a.txt
+echo 'a' > a.txt
+ls -l
+#-rw-r--r-- 2 root root 2  2月 12 14:47 a.txt
+#-rw-r--r-- 2 root root 2  2月 12 14:47 b.txt
+sed -i '1ia' a.txt
+ls -l
+-rw-r--r--  1 root root    4  2月 12 14:48 a.txt
+-rw-r--r--  1 root root    2  2月 12 14:47 b.txt
+----
