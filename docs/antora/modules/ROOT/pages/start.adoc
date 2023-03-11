@@ -1,0 +1,42 @@
+= 快速入门
+
+[source%nowrap,bash]
+----
+# 安装 basher
+curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
+
+# 安装 peacetrue-shell
+basher install peacetrue/peacetrue-shell
+#    Cloning into '~/.basher/cellar/packages/peacetrue/peacetrue-shell'...
+#    remote: Enumerating objects: 46, done.
+#    remote: Counting objects: 100% (46/46), done.
+#    remote: Compressing objects: 100% (37/37), done.
+#    remote: Total 46 (delta 2), reused 46 (delta 2), pack-reused 0
+#    Receiving objects: 100% (46/46), 2.12 MiB | 555.00 KiB/s, done.
+#    Resolving deltas: 100% (2/2), done.
+
+# 查看 basher 支持的命令
+basher commands
+#    commands
+#    completions
+#    help
+#    init
+#    install
+#    link
+#    list
+#    outdated
+#    package-path
+#    uninstall
+#    upgrade
+
+# 查看已安装的脚本库
+basher list
+#  peacetrue/peacetrue-shell
+
+# 查看已安装的脚本
+ls -la ~/.basher/cellar/bin
+#  lrwxr-xr-x  1 xiayx  staff   83 Aug  9 17:12 git-clear-commit -> ~/.basher/cellar/packages/peacetrue/peacetrue-shell/bin/git-clear-commit
+
+# 更新 peacetrue-shell
+basher upgrade peacetrue/peacetrue-shell
+----

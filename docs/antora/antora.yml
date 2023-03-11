@@ -1,10 +1,12 @@
 name: peacetrue-shell
 title: Shell 脚本库
 version: master
-start_page: ROOT:index.adoc
 asciidoc:
   attributes:
-    numbered: ''
+    numbered: '@'
+    website: https://peacetrue.github.io
+    app-group: com.github.peacetrue.learn
     app-name: peacetrue-shell
+start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
