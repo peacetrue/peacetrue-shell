@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# 更新 foresight 为 test space
+cd $workingDir || exit
+testspace='image:https://img.shields.io/testspace/tests/peacetrue/peacetrue:{app-name}/master["test space",link="https://peacetrue.testspace.com/"]'
+find . -name "index.adoc" | xargs sed -i "/repoId={foresight-repo-id}/a$testspace"
+find . -name "index.adoc" | xargs sed -i "/foresight-repo-id/d"
